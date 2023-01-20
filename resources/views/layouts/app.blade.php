@@ -50,7 +50,7 @@
                             @endif--}}
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="/">{{ __('Home page') }}</a>
+                                <a class="nav-link" href="/home">{{ __('Home page') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/blogs">{{ __('Blogs') }}</a>

@@ -19,7 +19,7 @@ class BlogFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => fake()->imageUrl(360, 360, 'animals', true, 'dogs', true),
+            'image' => 'logo_en.png', //fake()->imageUrl(360, 360, 'animals', true, 'dogs', true),
             'title' => fake()->words('3', 'true'),
             'content' => fake()->realText,
             'status' => 'published',

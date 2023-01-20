@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 
@@ -33,8 +34,8 @@ class BlogController extends Controller
 
                     return $btn;
                 })->addColumn('image', function ($row) {
-                    //$url = asset('storage/' . $artist->image);
-                    return '<img src="' . public_path('images/'.$row->image) . '" border="0" width="40" class="img-rounded" align="center" />';
+                    $url = URL::asset('/images/'.$row->image);
+                    return '<img src="'.$url.'" border="0" width="40" class="img-rounded" align="center" />';
                 })
                 ->rawColumns(['action', 'image'])
                 ->make(true);
@@ -124,5 +125,21 @@ class BlogController extends Controller
         $blog->delete();
         $this->message = __('Resource deleted successfully');
         return $this->apiResponse();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param $id
+     * @return Application|Factory|View
+     */
+    public function blogDetailPage($id): Application|Factory|View
+    {
+        try {
+            $blog = Blog::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            abort(404);
+        }
+        return view('blogs.detail', ['blog' => $blog]);
     }
 }
